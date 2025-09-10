@@ -1,0 +1,100 @@
+/* src/pages/Resources.css */
+
+.resources-page {
+  width: 100%;
+}
+
+/* --- Header Section --- */
+.resources-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.resources-header h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.resources-header p {
+  font-size: 1.1rem;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Category Section --- */
+.resource-category-section {
+  margin-bottom: 50px;
+}
+
+.category-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* --- Resource Grid --- */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.resource-card {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.resource-icon {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eef5ff;
+}
+
+.resource-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.resource-info h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+}
+
+.resource-info p {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.resource-arrow {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 1.5rem;
+}

@@ -1,0 +1,328 @@
+/* src/pages/Home.css */
+
+
+/* src/index.css OR src/App.css */
+
+/* --- Global Reset and Centering --- */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  background-color: #f0f8ff; /* Sets the light blue background for the whole page */
+  display: flex;
+  justify-content: center; /* This is key: it centers its direct child (#root) */
+}
+
+#root {
+  width: 100%;
+  max-width: 1400px; /* You can adjust this, it's the max width of your entire app */
+  background-color: #fff; /* Give the main app area a white background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Overall Home Section Styling --- */
+.home {
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center;
+  align-items: center; /* Center content horizontally */
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: 100vh; /* Adjust based on your navbar height */
+  padding: 40px 20px; /* Top/bottom padding, and generous left/right padding */
+  box-sizing: border-box; /* Include padding in element's total width/height */
+  background-color: #f0f8ff; /* Light blue background as in your design */
+  gap: 25px; /* Space between major sections like hero, roadmap, features */
+}
+
+/* --- Navbar Adjustments (if needed) --- */
+/* Ensure your Navbar also has appropriate background and padding */
+.navbar {
+  background-color: #fff; /* White background for navbar */
+  padding: 15px 20px; /* Match horizontal padding of home section */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Optional subtle shadow */
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar .auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar .logo-name {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.navbar .logo-name img {
+  height: 30px; /* Adjust logo size */
+  margin-right: 8px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #007bff; /* Example hover color */
+}
+
+.navbar button {
+  padding: 8px 18px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.navbar .login-btn {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.navbar .signup-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+
+/* --- Hero Section Styling --- */
+.hero {
+  display: flex;
+  justify-content: center; /* Space between text and image */
+  align-items: center;
+  width: 100%; /* Take full width of its parent (.home) */
+  max-width: 1000px; /* Limit hero content width */
+  text-align: left; /* Default text alignment */
+  margin-bottom: 40px; /* Space below hero section */
+}
+
+.hero-content {
+  flex: 1; /* Allow content to grow */
+  max-width: 100%; /* Adjust as needed */
+  margin-right: 40px; /* Space between text and image */
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3.2rem; /* Larger font size */
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center; /* centers buttons horizontally */
+  gap: 15px;
+}
+
+.hero-buttons .primary-btn {
+  background-color: #ff7f50; /* Orange color for primary */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-buttons .primary-btn:hover {
+  background-color: #e66a3e;
+}
+
+.hero-buttons .secondary-btn {
+  background-color: transparent;
+  color: #ff7f50;
+  padding: 12px 25px;
+  border: 1px solid #ff7f50;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-buttons .secondary-btn:hover {
+  background-color: #ff7f50;
+  color: white;
+}
+
+
+.hero-illustration {
+  flex-shrink: 0; /* Prevent image from shrinking */
+  width: 400px; /* Fixed width for illustration */
+  height: auto;
+}
+
+/* --- Roadmap Section Styling --- */
+.roadmap {
+  display: flex;
+  justify-content: center; /* Center the roadmap items */
+  gap: 80px; /* Space between each roadmap step */
+  width: 100%;
+  max-width: 1000px; /* Limit roadmap content width */
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.roadmap-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.roadmap-step img {
+  height: 120px; /* Adjust size of roadmap icons */
+  width: auto;
+}
+
+.roadmap-step2 img {
+  height: 80px; /* Adjust size of roadmap icons */
+  width: auto;
+}
+
+.roadmap-step span {
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: 500;
+}
+
+/* You might need to adjust the roadmap images to be horizontal if they are vertical in your current files. */
+/* For example, if you have separate images for the lines and dots, arrange them horizontally. */
+/* If your images are already combined like in your new screenshot, then just size them. */
+
+
+/* --- Feature Cards Section Styling --- */
+.features {
+  display: flex;
+  justify-content: center; /* Center the cards */
+  gap: 30px; /* Space between cards */
+  width: 100%;
+  max-width: 1000px; /* Limit feature cards content width */
+  margin-bottom: 60px; /* Space below features */
+}
+
+.feature-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Stronger shadow for cards */
+  text-align: center;
+  flex: 1; /* Allow cards to grow and shrink */
+  max-width: 320px; /* Max width for each card */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px); /* Subtle lift on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.feature-card img {
+  height: 130px; /* Larger icons for features */
+  width: auto;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.feature-card button {
+  background-color: #ff7f50; /* Orange color for card buttons */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feature-card button:hover {
+  background-color: #e66a3e;
+}
+.hero-text {
+  text-align: center;   /* center heading & paragraph */
+}
+.hero, .roadmap, .features {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+/* Orange box for icons */
+/* Orange background box for card images */
+.feature-img {
+  width: 100px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+
+  /* Subtle drop shadow */
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.feature-img:hover {
+  transform: scale(1.05); /* slight zoom effect */
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* src/index.css OR src/App.css */
+
+/* --- Global Reset --- */
+* {
+  box-sizing: border-box;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  color: #777;
+}
