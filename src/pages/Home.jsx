@@ -1,49 +1,169 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css'; 
+import React, { useState, useEffect, useRef } from 'react';
+// Removed 'Link' as we use standard 'a' tags for this self-contained example
+import './Home.css';
 
+// --- Reusable Feature Card Component ---
 function FeatureCard({ title, desc, cta, image, href }) {
   return (
-    <Link to={href} className="feature-card">
-      {/* Just the PNG image, no orange box */}
+    <a href={href} className="feature-card">
       <img src={image} alt={title} className="feature-img" />
-
       <h3>{title}</h3>
       <p>{desc}</p>
       <button className="feature-btn">{cta}</button>
-    </Link>
+    </a>
+  );
+}
+
+// --- Animated Counter for "Happy Clients" ---
+function AnimatedCounter({ finalValue, duration = 2000 }) {
+  const [count, setCount] = useState(0);
+  const counterRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          let start = 0;
+          const end = finalValue;
+          if (start === end) return;
+
+          let startTime = null;
+          const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const currentCount = Math.floor(progress * end);
+            setCount(currentCount);
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+                // Ensure it ends on the exact value
+                setCount(end);
+            }
+          };
+          window.requestAnimationFrame(step);
+          observer.disconnect(); // Stop observing after animation starts
+        }
+      },
+      { threshold: 0.7 } // Start when 70% of the element is visible
+    );
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [finalValue, duration]);
+  
+  const displayValue = count >= 5000 ? '5K+' : count;
+
+  return (
+    <span ref={counterRef} className="happy-clients-number">
+      {displayValue}
+    </span>
   );
 }
 
 
-// This is the main Home page component.
-export default function Home() {
+// --- New Testimonials Section Component ---
+function Testimonials() {
+  const testimonialsData = [
+    {
+      quote: "Game-changing environmental responsibility and cutting-edge solutions.",
+      author: "Dr. Emily Rodriguez",
+      role: "Research Director",
+      img: "https://i.pravatar.cc/150?img=1"
+    },
+    {
+      quote: "Outstanding innovation in renewable materials. Their approach to sustainability is truly inspiring.",
+      author: "Sarah Williams",
+      role: "Sustainability Consultant",
+      img: "https://i.pravatar.cc/150?img=2"
+    },
+    {
+      quote: "Exceptional quality. These materials have transformed our projects.",
+      author: "David Kim",
+      role: "Operations Director",
+      img: "https://i.pravatar.cc/150?img=3"
+    },
+    {
+      quote: "A truly collaborative partner. Their expertise helped us achieve our sustainability goals ahead of schedule.",
+      author: "Maria Garcia",
+      role: "Chief Operating Officer",
+      img: "https://i.pravatar.cc/150?img=4"
+    },
+    {
+      quote: "The team's dedication and passion for their work is evident in the final product. Highly recommended.",
+      author: "Johnathan Chen",
+      role: "Lead Engineer",
+      img: "https://i.pravatar.cc/150?img=5"
+    }
+  ];
+
+  // Duplicate the array to create a seamless loop
+  const duplicatedTestimonials = [...testimonialsData, ...testimonialsData];
+
   return (
-    <section className="home">
-      {/* Hero Section */}
-      <div className="hero">
-        <div className="hero-content">
-          <h1>
-            Confused about your career?
-            <br />
-            We guide you every step of the way.
-          </h1>
-          <p>
-            Take a short quiz, explore recommended courses and find the right
-            government colleges in your area.
-          </p>
-          <div className="hero-buttons">
-            <Link to="/quiz" className="primary-btn">
-              Take Career Quiz
-            </Link>
-            <Link to="/courses" className="secondary-btn">
-              Explore Courses & Colleges
-            </Link>
-          </div>
+    <section className="testimonials">
+      <h2 className="testimonial-title">
+        What Our <span className="highlight">Clients</span> Say <span className="highlight-green">About Us</span>
+      </h2>
+
+      <div className="testimonial-scroller">
+        <div className="testimonial-track">
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <div className="testimonial-card" key={index}>
+              <div className="quote-icon">❞</div>
+              <div className="stars">★★★★★</div>
+              <p>"{testimonial.quote}"</p>
+              <div className="author">
+                <img src={testimonial.img} alt={testimonial.author} />
+                <div>
+                  <h4>{testimonial.author}</h4>
+                  <span>{testimonial.role}</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+      
+      <div className="happy-clients">
+        <AnimatedCounter finalValue={5000} /> Happy Clients
+      </div>
+    </section>
+  );
+}
 
-      {/* Roadmap Section */}
+
+// --- Main Home Page Component ---
+export default function Home() {
+  return (
+    <>
+      <section className="home">
+        {/* Hero Section */}
+        <div className="hero">
+          <div className="hero-content">
+            <h1>
+              Confused about your career?
+              <br />
+              We guide you every step of the way.
+            </h1>
+            <p>
+              Take a short quiz, explore recommended courses and find the right
+              government colleges in your area.
+            </p>
+            <div className="hero-buttons">
+              <a href="/quiz" className="primary-btn">
+                Take Career Quiz
+              </a>
+              <a href="/courses" className="secondary-btn">
+                Explore Courses & Colleges
+              </a>
+            </div>
+          </div>
+        </div>
+
+{/* Roadmap Section */}
       <div className="roadmap">
         <div className="roadmap-step">
           <img src="/assets/student.png" alt="Student icon for quiz step" />
@@ -90,5 +210,9 @@ export default function Home() {
         />
       </div>
     </section>
+      
+      {/* New Testimonials Section Added Here */}
+      <Testimonials />
+    </>
   );
 }

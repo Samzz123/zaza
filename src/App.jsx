@@ -1,9 +1,9 @@
-// src/App.jsx
+// Final Production src/App.jsx with Enhanced Routing
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Keep your existing page imports
+// Import all components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -11,32 +11,51 @@ import CollegeFinder from './pages/CollegeFinder';
 import Courses from './pages/Courses';
 import Quiz from './pages/Quiz';
 import Resources from './pages/Resources';
-
-// --- Add the new page imports ---
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   return (
     <Router>
-      <Navbar />
+      <div className="app-container">
+        <Navbar />
+        
+        <main className="content-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/college" element={<CollegeFinder />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            
+            {/* Add individual college detail route */}
+            <Route path="/college/:id" element={<CollegeDetail />} />
+          </Routes>
+        </main>
 
-      <main className="content-container">
-        <Routes>
-          {/* Keep your existing routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/college" element={<CollegeFinder />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/resources" element={<Resources />} />
-          
-          {/* --- Add the new routes --- */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </main>
-
-      <Footer />
+        <Footer />
+      </div>
     </Router>
   );
 }
+
+// Enhanced College Detail Component
+const CollegeDetail = () => {
+  return (
+    <div style={{
+      padding: '2rem',
+      textAlign: 'center',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      minHeight: '60vh',
+      color: 'white',
+      borderRadius: '20px',
+      margin: '1rem'
+    }}>
+      <h1>🏛️ College Details</h1>
+      <p>Individual college details will be displayed here</p>
+      <p style={{ opacity: 0.8 }}>This feature is coming soon!</p>
+    </div>
+  );
+};
