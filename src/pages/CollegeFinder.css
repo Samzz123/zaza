@@ -355,6 +355,10 @@
   display: inline-block;
   margin-right: 0.5rem;
   animation: bounce 2s infinite;
+  background: linear-gradient(135deg, #ffffff, #354980, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Advanced Filter Section */

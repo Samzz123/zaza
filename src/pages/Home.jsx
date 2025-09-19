@@ -68,25 +68,25 @@ function AnimatedCounter({ finalValue, duration = 2000 }) {
 function Testimonials() {
   const testimonialsData = [
     {
-      quote: "Game-changing environmental responsibility and cutting-edge solutions.",
+      quote: "Aspire Sync completely changed my college search game! I was so overwhelmed with hundreds of options, but their college finder narrowed it down to 5 perfect matches. Got into my top choice with a scholarship!",
       author: "Dr. Emily Rodriguez",
       role: "Research Director",
       img: "https://i.pravatar.cc/150?img=1"
     },
     {
-      quote: "Outstanding innovation in renewable materials. Their approach to sustainability is truly inspiring.",
+      quote: "The career quiz blew my mind! I thought I wanted to be a doctor, but it showed me UX design - something I'd never heard of. Now I'm pursuing it and absolutely loving every moment of learning.",
       author: "Sarah Williams",
       role: "Sustainability Consultant",
       img: "https://i.pravatar.cc/150?img=2"
     },
     {
-      quote: "Exceptional quality. These materials have transformed our projects.",
+      quote: "I was totally lost about my major until I found Aspire Sync. The resources section has everything - from career guides to interview prep. Just landed my first internship at a startup!",
       author: "David Kim",
       role: "Operations Director",
       img: "https://i.pravatar.cc/150?img=3"
     },
     {
-      quote: "A truly collaborative partner. Their expertise helped us achieve our sustainability goals ahead of schedule.",
+      quote: "As a first-generation college student, I had no idea where to start. This platform walked me through everything step by step. The course recommendations are spot-on and actually fun to complete!",
       author: "Maria Garcia",
       role: "Chief Operating Officer",
       img: "https://i.pravatar.cc/150?img=4"
@@ -105,7 +105,7 @@ function Testimonials() {
   return (
     <section className="testimonials">
       <h2 className="testimonial-title">
-        What Our <span className="highlight">Clients</span> Say <span className="highlight-green">About Us</span>
+        What Our <span className="highlight">Students</span> Say <span className="highlight-green">About Us</span>
       </h2>
 
       <div className="testimonial-scroller">
@@ -128,7 +128,7 @@ function Testimonials() {
       </div>
       
       <div className="happy-clients">
-        <AnimatedCounter finalValue={5000} /> Happy Clients
+        <AnimatedCounter finalValue={5000} /> Happy Students
       </div>
     </section>
   );

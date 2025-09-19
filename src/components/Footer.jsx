@@ -3,9 +3,12 @@ import './Footer.css'; // Import the new CSS file
 
 // A simple SVG logo component for "Aspire Sync"
 const Logo = () => (
-  <svg height="32" width="32" className="footer-logo-svg" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-    <path fill="currentColor" d="M91.33 117.33a37.33 37.33 0 1 1 0-53.21 37.33 37.33 0 0 1 0 53.21ZM64 128a64 64 0 1 1 64-64 64 64 0 0 1-64 64Z M36.67 10.67a37.33 37.33 0 1 0 0 53.21 37.33 37.33 0 0 0 0-53.21Z"/>
-  </svg>
+  <img
+    src="/logo.png"
+    alt="Aspire Sync Logo"
+    className="footer-logo-img"
+    style={{ height: '32px', width: '32px' }}
+  />
 );
 
 

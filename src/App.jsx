@@ -1,4 +1,4 @@
-// Final Production src/App.jsx with Enhanced Routing
+// Updated App.jsx with proper signup routing
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,7 +12,10 @@ import Courses from './pages/Courses';
 import Quiz from './pages/Quiz';
 import Resources from './pages/Resources';
 import Login from "./pages/Login";
+import Signup from "./pages/Signup"; // Make sure this import exists
 import Dashboard from "./pages/Dashboard";
+import AboutUs from "./pages/AboutUs";
+import FAQ from "./pages/FAQ";
 
 export default function App() {
   return (
@@ -28,7 +31,10 @@ export default function App() {
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/faq" element={<FAQ />} />
             
             {/* Add individual college detail route */}
             <Route path="/college/:id" element={<CollegeDetail />} />

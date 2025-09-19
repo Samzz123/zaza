@@ -574,11 +574,11 @@ footer {
 
 /* Updated highlight styles to match the image */
 .testimonial-title .highlight {
-  color: #764ba2; /* Purple color */
+  color: #349be5; /* Purple color */
 }
 
 .testimonial-title .highlight-green {
-  color: #10b981; /* Green color */
+  color: #ff7f50; /* Green color */
 }
 
 
@@ -611,10 +611,7 @@ footer {
 
 
 /* MODIFIED Testimonial Card Styles */
-.testimonial-cards {
-  /* This container is no longer needed for layout */
-  /* You can remove the old .testimonial-cards rule */
-}
+/* .testimonial-cards ruleset removed as it was empty */
 
 .testimonial-card {
   width: 320px; /* Set a fixed width for each card */
@@ -639,7 +636,7 @@ footer {
 
 .quote-icon {
   font-size: 2.5rem;
-  color: #10b981;
+  color: #ff7f50;
   margin-bottom: 0.5rem;
   font-family: serif;
 }
@@ -680,7 +677,7 @@ footer {
 
 .author span {
   font-size: 0.9rem;
-  color: #764ba2;
+  color: #3778fb;
 }
 
 /* Happy Clients Counter Styles */
@@ -698,6 +695,6 @@ footer {
 
 .happy-clients .happy-clients-number {
   font-weight: 900;
-  color: #10b981;
+  color: #ff7f50;
   margin-right: 8px;
 }
