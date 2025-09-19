@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Import all components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AIChatbot from './components/AIChatbot'; // Import the chatbot
 import Home from './pages/Home';
 import CollegeFinder from './pages/CollegeFinder';
 import Courses from './pages/Courses';
@@ -15,9 +16,49 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import AboutUs from "./pages/AboutUs";
 import FAQ from "./pages/FAQ";
-import AIChatbot from './components/AIChatbot'; // 1. Import the chatbot
 
-// A placeholder for the component, assuming it exists in another file
+export default function App() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
+  return (
+    <Router>
+      <div className="app-container">
+        {/* Pass the toggle function to Navbar */}
+        <Navbar onChatClick={toggleChat} />
+        
+        <main className="content-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/college" element={<CollegeFinder />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/faq" element={<FAQ />} />
+            
+            {/* Add individual college detail route */}
+            <Route path="/college/:id" element={<CollegeDetail />} />
+          </Routes>
+        </main>
+
+        <Footer />
+        
+        {/* The Chatbot component itself, controlled by App's state */}
+        <AIChatbot isOpen={isChatOpen} onClose={toggleChat} />
+      </div>
+    </Router>
+  );
+}
+
+// Enhanced College Detail Component
 const CollegeDetail = () => {
   return (
     <div style={{
@@ -35,34 +76,4 @@ const CollegeDetail = () => {
     </div>
   );
 };
-
-export default function App() {
-  return (
-    <Router>
-      <div className="app-container">
-        <Navbar />
-        
-        <main className="content-container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/college" element={<CollegeFinder />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/quiz" element={<Quiz />} />
-            <Route path="/roadmap" element={<Roadmap />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/college/:id" element={<CollegeDetail />} />
-          </Routes>
-        </main>
-
-        <AIChatbot /> {/* 2. Add the chatbot component here */}
-        <Footer />
-      </div>
-    </Router>
-  );
-}
 
