@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { MessageSquare, X } from 'lucide-react'; // Using icons from lucide-react
+import { MessageSquare, X } from 'lucide-react';
 
-// This is a placeholder component. You can build out your full chatbot logic here.
 export default function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -9,7 +8,6 @@ export default function AIChatbot() {
     setIsOpen(!isOpen);
   };
 
-  // When the chat is closed, show a floating button
   if (!isOpen) {
     return (
       <button
@@ -22,10 +20,8 @@ export default function AIChatbot() {
     );
   }
 
-  // When the chat is open, show the chat window
   return (
     <div className="fixed bottom-6 right-6 w-96 h-[60vh] bg-white rounded-lg shadow-2xl flex flex-col z-50">
-      {/* Header */}
       <div className="flex justify-between items-center p-4 bg-blue-600 text-white rounded-t-lg">
         <h3 className="font-bold text-lg">AI Assistant</h3>
         <button onClick={toggleChat} className="hover:bg-blue-700 p-1 rounded-full" aria-label="Close Chatbot">
@@ -33,15 +29,12 @@ export default function AIChatbot() {
         </button>
       </div>
 
-      {/* Chat messages area */}
       <div className="flex-1 p-4 overflow-y-auto">
         <p className="text-sm text-gray-600 bg-gray-100 p-3 rounded-lg">
-          Hello! How can I help you with your college search today?
+          Hello! How can I help you today?
         </p>
-        {/* Chat messages would go here */}
       </div>
 
-      {/* Input area */}
       <div className="p-4 border-t border-gray-200">
         <input
           type="text"
