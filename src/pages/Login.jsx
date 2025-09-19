@@ -60,7 +60,24 @@ function Login() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       console.log("Logging in with:", formData);
+      
+      // Set authentication state
+      const userData = {
+        name: "John Doe",
+        email: formData.email,
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format",
+        role: "Student"
+      };
+      
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userData', JSON.stringify(userData));
+      
+      // Navigate to dashboard
       navigate("/dashboard");
+      
+      // Reload the page to update the navbar state
+      window.location.reload();
+      
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
@@ -70,7 +87,20 @@ function Login() {
 
   const handleSocialLogin = (provider) => {
     console.log(`Logging in with ${provider}`);
-    // Add your social login logic here
+    
+    // For demonstration, set authentication state for social login too
+    const userData = {
+      name: "John Doe",
+      email: `john.doe.${provider.toLowerCase()}@email.com`,
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format",
+      role: "Student"
+    };
+    
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userData', JSON.stringify(userData));
+    
+    navigate("/dashboard");
+    window.location.reload();
   };
 
   return (
