@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 // Removed 'Link' as we use standard 'a' tags for this self-contained example
 import './Home.css';
+// At the top with other imports
+import AIChatbot from '../components/AIChatbot';
 
+// Inside your Home component's return statement, add this line:
+<AIChatbot />
 // --- Reusable Feature Card Component ---
 function FeatureCard({ title, desc, cta, image, href }) {
   return (
