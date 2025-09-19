@@ -448,7 +448,7 @@
 .match-fill {
   height: 100%;
   border-radius: 10px;
-  background: linear-gradient(90deg, #121312, #10b981);
+  background: linear-gradient(90deg, #34d399, #10b981);
   transform-origin: left;
   animation: fill-bar 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s both;
 }

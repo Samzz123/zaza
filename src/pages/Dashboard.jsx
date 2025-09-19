@@ -5,43 +5,41 @@ import "./Dashboard.css";
 function Dashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeTab, setActiveTab] = useState('overview');
-  
+  const [bookmarkedItems, setBookmarkedItems] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+
   // Mock user data
-  const user = {
+const user = {
     name: "John Doe",
     email: "john.doe@email.com",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format",
-    joinedDate: "March 2024",
-    role: "Student",
-    completedCourses: 8,
-    totalCourses: 12,
-    currentStreak: 15,
-    totalPoints: 2847
+    joinedDate: "September 2025",
+    role: "Aspiring Student",
   };
 
   // Mock dashboard data
   const dashboardData = {
     stats: [
-      { id: 1, title: "Courses Completed", value: "8/12", icon: "📚", color: "#667eea" },
-      { id: 2, title: "Current Streak", value: "15 days", icon: "🔥", color: "#f093fb" },
-      { id: 3, title: "Total Points", value: "2,847", icon: "⭐", color: "#4facfe" },
-      { id: 4, title: "Certificates", value: "3", icon: "🏆", color: "#f5576c" }
+      { id: 1, title: "Quizzes Taken", value: "4", icon: "🧠", color: "#667eea" },
+      { id: 2, title: "Career Paths Explored", value: "3", icon: "🧭", color: "#f093fb" },
+      { id: 3, title: "Scholarships Found", value: "8", icon: "🎓", color: "#4facfe" },
+      { id: 4, title: "Bookmarks Saved", value: `${bookmarkedItems.length}`, icon: "🔖", color: "#f5576c" }
     ],
-    recentCourses: [
-      { id: 1, title: "React Fundamentals", progress: 85, difficulty: "Intermediate", timeLeft: "2 hours" },
-      { id: 2, title: "JavaScript Advanced", progress: 92, difficulty: "Advanced", timeLeft: "30 mins" },
-      { id: 3, title: "CSS Grid & Flexbox", progress: 45, difficulty: "Beginner", timeLeft: "4 hours" }
+    degreeSuggestions: [
+      { id: 1, title: "B.Tech in Computer Science", rating: 92, match: "Excellent Match", field: "Technology" },
+      { id: 2, title: "B.Com in Finance", rating: 85, match: "Good Match", field: "Commerce" },
+      { id: 3, title: "B.Sc in Data Science", rating: 78, match: "Potential Fit", field: "Science" }
     ],
-    upcomingTasks: [
-      { id: 1, title: "Complete React Project", dueDate: "Today", priority: "high" },
-      { id: 2, title: "JavaScript Quiz", dueDate: "Tomorrow", priority: "medium" },
-      { id: 3, title: "CSS Assignment", dueDate: "Dec 28", priority: "low" },
-      { id: 4, title: "Portfolio Review", dueDate: "Dec 30", priority: "medium" }
+    scholarshipNotifications: [
+      { id: 1, title: "Tech Innovators Scholarship", college: "State University", deadline: "Today", priority: "high" },
+      { id: 2, title: "Future Leaders Grant", college: "National College", deadline: "Tomorrow", priority: "medium" },
+      { id: 3, title: "Commerce Excellence Award", college: "City Business School", deadline: "Oct 15", priority: "low" },
+      { id: 4, title: "Science Achievers Program", college: "Institute of Science", deadline: "Oct 20", priority: "medium" }
     ],
-    achievements: [
-      { id: 1, title: "First Course Completed", icon: "🎯", date: "Dec 15" },
-      { id: 2, title: "Week Streak", icon: "🔥", date: "Dec 20" },
-      { id: 3, title: "Quiz Master", icon: "🧠", date: "Dec 22" }
+    quizHistory: [
+      { id: 1, title: "Aptitude Quiz", score: "95%", icon: "🎯", date: "Sep 18" },
+      { id: 2, title: "Personality Test", score: "Insightful", icon: "🤔", date: "Sep 15" },
+      { id: 3, title: "Career Interest Quiz", score: "Tech-Oriented", icon: "💡", date: "Sep 12" }
     ]
   };
 
@@ -53,10 +51,10 @@ function Dashboard() {
   }, []);
 
   const formatTime = (date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour12: true, 
-      hour: 'numeric', 
-      minute: '2-digit' 
+    return date.toLocaleTimeString('en-US', {
+      hour12: true,
+      hour: 'numeric',
+      minute: '2-digit'
     });
   };
 
@@ -76,6 +74,27 @@ function Dashboard() {
     }
   };
 
+  const getMatchColor = (match) => {
+    switch (match) {
+      case 'Excellent Match': return '#10B981';
+      case 'Good Match': return '#F59E0B';
+      case 'Potential Fit': return '#3B82F6';
+      default: return '#6B7280';
+    }
+  };
+
+  const toggleBookmark = (item) => {
+    const isBookmarked = bookmarkedItems.some(bookmark => bookmark.id === item.id);
+    if (isBookmarked) {
+      setBookmarkedItems(bookmarkedItems.filter(bookmark => bookmark.id !== item.id));
+    } else {
+      setBookmarkedItems([...bookmarkedItems, item]);
+    }
+  };
+
+  const isBookmarked = (item) => bookmarkedItems.some(bookmark => bookmark.id === item.id);
+
+
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
@@ -88,33 +107,33 @@ function Dashboard() {
         </div>
 
         <nav className="sidebar-nav">
-          <button 
+          <button
             className={`nav-item ${activeTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveTab('overview')}
           >
             <span className="nav-icon">📊</span>
             <span>Overview</span>
           </button>
-          <button 
-            className={`nav-item ${activeTab === 'courses' ? 'active' : ''}`}
-            onClick={() => setActiveTab('courses')}
-          >
-            <span className="nav-icon">📚</span>
-            <span>My Courses</span>
-          </button>
-          <button 
-            className={`nav-item ${activeTab === 'progress' ? 'active' : ''}`}
-            onClick={() => setActiveTab('progress')}
+          <button
+            className={`nav-item ${activeTab === 'degrees' ? 'active' : ''}`}
+            onClick={() => setActiveTab('degrees')}
           >
             <span className="nav-icon">📈</span>
-            <span>Progress</span>
+            <span>Degree Suggestions</span>
           </button>
-          <button 
-            className={`nav-item ${activeTab === 'achievements' ? 'active' : ''}`}
-            onClick={() => setActiveTab('achievements')}
+          <button
+            className={`nav-item ${activeTab === 'scholarships' ? 'active' : ''}`}
+            onClick={() => setActiveTab('scholarships')}
           >
             <span className="nav-icon">🏆</span>
-            <span>Achievements</span>
+            <span>Scholarships</span>
+          </button>
+          <button
+            className={`nav-item ${activeTab === 'bookmarks' ? 'active' : ''}`}
+            onClick={() => setActiveTab('bookmarks')}
+          >
+            <span className="nav-icon">🔖</span>
+            <span>Bookmarks</span>
           </button>
         </nav>
 
@@ -139,10 +158,27 @@ function Dashboard() {
               {getGreeting()}, {user.name}! 👋
             </h1>
             <p className="dashboard-subtitle">
-              Ready to continue your learning journey?
+              Let's explore your future career path!
             </p>
           </div>
           <div className="header-right">
+            <div className="notification-icon" onClick={() => setShowNotifications(!showNotifications)}>
+              <span>🔔</span>
+              {dashboardData.scholarshipNotifications.length > 0 && (
+                <span className="notification-badge">{dashboardData.scholarshipNotifications.length}</span>
+              )}
+              {showNotifications && (
+                <div className="notification-dropdown">
+                  <h3>Scholarship Alerts</h3>
+                  {dashboardData.scholarshipNotifications.map(scholarship => (
+                    <div key={scholarship.id} className="notification-item">
+                      <p><strong>{scholarship.title}</strong></p>
+                      <p>Deadline: {scholarship.deadline}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <div className="time-display">
               <span className="current-time">{formatTime(currentTime)}</span>
               <span className="current-date">{currentTime.toLocaleDateString()}</span>
@@ -164,7 +200,7 @@ function Dashboard() {
               {/* Stats Grid */}
               <section className="stats-grid">
                 {dashboardData.stats.map((stat) => (
-                  <div key={stat.id} className="stat-card" style={{ borderColor: stat.color }}>
+                  <div key={stat.id} className="stat-card" style={{ '--card-color': stat.color }}>
                     <div className="stat-icon" style={{ backgroundColor: stat.color + '20' }}>
                       {stat.icon}
                     </div>
@@ -178,73 +214,54 @@ function Dashboard() {
 
               {/* Main Grid */}
               <div className="content-grid">
-                {/* Recent Courses */}
+                {/* Degree Suggestions */}
                 <section className="content-card">
                   <div className="card-header">
-                    <h2 className="card-title">Recent Courses</h2>
-                    <Link to="/courses" className="card-action">View All</Link>
+                    <h2 className="card-title">Top Degree Suggestions</h2>
+                    <Link to="#" onClick={() => setActiveTab('degrees')} className="card-action">View All</Link>
                   </div>
-                  <div className="courses-list">
-                    {dashboardData.recentCourses.map((course) => (
-                      <div key={course.id} className="course-item">
-                        <div className="course-info">
-                          <h3 className="course-title">{course.title}</h3>
-                          <div className="course-meta">
-                            <span className={`difficulty ${course.difficulty.toLowerCase()}`}>
-                              {course.difficulty}
-                            </span>
-                            <span className="time-left">{course.timeLeft} left</span>
+                  <div className="degree-list">
+                    {dashboardData.degreeSuggestions.map((degree) => (
+                      <div key={degree.id} className="degree-item">
+                        <div className="degree-info">
+                          <h3 className="degree-title">{degree.title}</h3>
+                          <div className="degree-meta">
+                            <span className="degree-field">{degree.field}</span>
+                            <span className="degree-match" style={{ color: getMatchColor(degree.match) }}>{degree.match}</span>
                           </div>
                         </div>
-                        <div className="course-progress">
-                          <div className="progress-bar">
-                            <div 
-                              className="progress-fill" 
-                              style={{ width: `${course.progress}%` }}
-                            ></div>
+                        <div className="degree-rating">
+                          <div className="rating-circle" style={{ background: `conic-gradient(#667eea ${degree.rating * 3.6}deg, #e2e8f0 0deg)` }}>
+                            <span className="rating-text">{degree.rating}%</span>
                           </div>
-                          <span className="progress-text">{course.progress}%</span>
+                          <button className={`bookmark-btn ${isBookmarked(degree) ? 'bookmarked' : ''}`} onClick={() => toggleBookmark(degree)}>
+                            {isBookmarked(degree) ? '★' : '☆'}
+                          </button>
                         </div>
                       </div>
                     ))}
                   </div>
                 </section>
 
-                {/* Tasks & Achievements */}
+                {/* Scholarships & Quiz History */}
                 <div className="right-column">
-                  {/* Upcoming Tasks */}
+                  {/* Scholarship Notifications */}
                   <section className="content-card tasks-card">
                     <div className="card-header">
-                      <h2 className="card-title">Upcoming Tasks</h2>
-                      <span className="task-count">{dashboardData.upcomingTasks.length}</span>
+                      <h2 className="card-title">Scholarship Alerts</h2>
+                      <span className="task-count">{dashboardData.scholarshipNotifications.length}</span>
                     </div>
                     <div className="tasks-list">
-                      {dashboardData.upcomingTasks.map((task) => (
-                        <div key={task.id} className="task-item">
-                          <div className="task-priority" style={{ backgroundColor: getPriorityColor(task.priority) }}></div>
+                      {dashboardData.scholarshipNotifications.map((scholarship) => (
+                        <div key={scholarship.id} className="task-item">
+                          <div className="task-priority" style={{ backgroundColor: getPriorityColor(scholarship.priority) }}></div>
                           <div className="task-info">
-                            <h4 className="task-title">{task.title}</h4>
-                            <span className="task-due">{task.dueDate}</span>
+                            <h4 className="task-title">{scholarship.title}</h4>
+                            <span className="task-due">Deadline: {scholarship.deadline}</span>
                           </div>
-                          <button className="task-check">✓</button>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-
-                  {/* Recent Achievements */}
-                  <section className="content-card achievements-card">
-                    <div className="card-header">
-                      <h2 className="card-title">Recent Achievements</h2>
-                    </div>
-                    <div className="achievements-list">
-                      {dashboardData.achievements.map((achievement) => (
-                        <div key={achievement.id} className="achievement-item">
-                          <span className="achievement-icon">{achievement.icon}</span>
-                          <div className="achievement-info">
-                            <h4 className="achievement-title">{achievement.title}</h4>
-                            <span className="achievement-date">{achievement.date}</span>
-                          </div>
+                          <button className={`bookmark-btn ${isBookmarked(scholarship) ? 'bookmarked' : ''}`} onClick={() => toggleBookmark(scholarship)}>
+                            {isBookmarked(scholarship) ? '★' : '☆'}
+                          </button>
                         </div>
                       ))}
                     </div>
@@ -254,76 +271,27 @@ function Dashboard() {
             </>
           )}
 
-          {activeTab === 'courses' && (
+          {activeTab === 'bookmarks' && (
             <section className="tab-content">
-              <h2 className="tab-title">My Courses</h2>
-              <div className="courses-grid">
-                {dashboardData.recentCourses.map((course) => (
-                  <div key={course.id} className="course-card">
-                    <div className="course-card-header">
-                      <h3>{course.title}</h3>
-                      <span className={`difficulty ${course.difficulty.toLowerCase()}`}>
-                        {course.difficulty}
-                      </span>
+              <h2 className="tab-title">Your Bookmarks</h2>
+              <div className="bookmarks-grid">
+                {bookmarkedItems.length > 0 ? (
+                  bookmarkedItems.map((item) => (
+                    <div key={item.id} className="bookmark-card">
+                      <h3>{item.title}</h3>
+                      {item.college && <p>College: {item.college}</p>}
+                      {item.field && <p>Field: {item.field}</p>}
+                      <button className="remove-bookmark-btn" onClick={() => toggleBookmark(item)}>Remove</button>
                     </div>
-                    <div className="course-card-progress">
-                      <div className="progress-bar">
-                        <div 
-                          className="progress-fill" 
-                          style={{ width: `${course.progress}%` }}
-                        ></div>
-                      </div>
-                      <span className="progress-text">{course.progress}% Complete</span>
-                    </div>
-                    <button className="continue-btn">Continue Learning</button>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p>You haven't bookmarked any items yet.</p>
+                )}
               </div>
             </section>
           )}
 
-          {activeTab === 'progress' && (
-            <section className="tab-content">
-              <h2 className="tab-title">Learning Progress</h2>
-              <div className="progress-overview">
-                <div className="progress-stat">
-                  <h3>Overall Completion</h3>
-                  <div className="large-progress-circle">
-                    <span className="progress-percentage">67%</span>
-                  </div>
-                </div>
-                <div className="progress-details">
-                  <div className="progress-item">
-                    <span>Courses Completed</span>
-                    <span>8 of 12</span>
-                  </div>
-                  <div className="progress-item">
-                    <span>Hours Studied</span>
-                    <span>127 hours</span>
-                  </div>
-                  <div className="progress-item">
-                    <span>Average Score</span>
-                    <span>92%</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {activeTab === 'achievements' && (
-            <section className="tab-content">
-              <h2 className="tab-title">Achievements</h2>
-              <div className="achievements-grid">
-                {dashboardData.achievements.map((achievement) => (
-                  <div key={achievement.id} className="achievement-card">
-                    <div className="achievement-card-icon">{achievement.icon}</div>
-                    <h3>{achievement.title}</h3>
-                    <p>Earned on {achievement.date}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+          {/* Other tabs content */}
         </div>
       </main>
     </div>
