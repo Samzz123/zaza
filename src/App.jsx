@@ -1,4 +1,4 @@
-// Updated App.jsx with proper signup routing
+// Updated App.jsx with Roadmap route
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -10,9 +10,10 @@ import Home from './pages/Home';
 import CollegeFinder from './pages/CollegeFinder';
 import Courses from './pages/Courses';
 import Quiz from './pages/Quiz';
+import Roadmap from './pages/Roadmap'; // New import
 import Resources from './pages/Resources';
 import Login from "./pages/Login";
-import Signup from "./pages/Signup"; // Make sure this import exists
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import AboutUs from "./pages/AboutUs";
 import FAQ from "./pages/FAQ";
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/college" element={<CollegeFinder />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/quiz" element={<Quiz />} />
+            <Route path="/roadmap" element={<Roadmap />} /> {/* New route */}
             <Route path="/resources" element={<Resources />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
