@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./dashboard.css";
+import "./Dashboard.css";
 
 function Dashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
