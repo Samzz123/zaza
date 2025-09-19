@@ -1,4 +1,4 @@
-// Updated App.jsx with Roadmap route
+// Updated App.jsx with AIChatbot and Roadmap route
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -10,13 +10,14 @@ import Home from './pages/Home';
 import CollegeFinder from './pages/CollegeFinder';
 import Courses from './pages/Courses';
 import Quiz from './pages/Quiz';
-import Roadmap from './pages/Roadmap'; // New import
+import Roadmap from './pages/Roadmap';
 import Resources from './pages/Resources';
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import AboutUs from "./pages/AboutUs";
 import FAQ from "./pages/FAQ";
+import AIChatbot from './components/AIChatbot'; // Import the chatbot
 
 export default function App() {
   return (
@@ -30,7 +31,7 @@ export default function App() {
             <Route path="/college" element={<CollegeFinder />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/quiz" element={<Quiz />} />
-            <Route path="/roadmap" element={<Roadmap />} /> {/* New route */}
+            <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
@@ -43,6 +44,7 @@ export default function App() {
           </Routes>
         </main>
 
+        <AIChatbot /> {/* Add the chatbot component here */}
         <Footer />
       </div>
     </Router>
